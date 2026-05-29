@@ -1,0 +1,200 @@
+/* =========================================================
+   PDS Information Component
+   - Figma node: 50202:37363
+   - Variants: compact (vertical), wide (horizontal)
+   - 컴포넌트 사이 간격: 해상도 관계 없이 20px
+   ========================================================= */
+
+/* =========================
+   Base / Wide (Desktop)
+   - Layout: horizontal (title left, paragraph right)
+   - Gap between title & paragraph: 64px
+   ========================= */
+.pds-information {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.pds-information__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem 0; /* 20px — Figma spec */
+}
+
+/* --- Item: wide (default) --- */
+.pds-information__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6.4rem; /* 64px */
+}
+
+.pds-information__item--center {
+  width: fit-content;
+  align-self: center;
+  align-items: center;
+  gap: 0;
+}
+
+/* --- Title --- */
+.pds-information__title {
+  flex-shrink: 0;
+  min-width: 12rem; /* 120px */
+  max-width: 20rem; /* 200px — 다국어 title 대응 */
+  font-weight: 700;
+  font-size: 2.1rem; /* font/size/50 = 21px */
+  line-height: 1.5;
+  color: var(--color-text-primary, #051766);
+}
+
+/* title type: highlighter */
+.pds-information__title--highlighter {
+  display: inline;
+  background: linear-gradient(to top, var(--color-text-primary, #051766) 40%, transparent 40%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  color: #fff;
+  padding: 0 0.4rem;
+}
+
+/* --- Paragraph --- */
+.pds-information__paragraph {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem; /* 8px */
+  font-size: 1.8rem; /* font/size/40 = 18px */
+  line-height: 1.5;
+  color: var(--color-text-primary, #051766);
+  max-width: 120rem; /* 1200px */
+}
+
+.pds-information__paragraph p {
+  margin-bottom: 0.8rem;
+}
+
+.pds-information__paragraph p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Copy (discount code row) --- */
+.pds-information__copy-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem; /* 12px — Figma copy gap */
+}
+
+.pds-information__copy {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem; /* 4px */
+  border: 0;
+  background: transparent;
+  font-size: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pds-information__copy:hover {
+  opacity: 0.7;
+}
+
+/* --- Disclaimer --- */
+.pds-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem; /* 4px */
+  font-size: 1.6rem; /* font/size/30 = 16px (wide) */
+  line-height: 1.5;
+  color: var(--color-text-tertiary, #5e5e5e);
+}
+
+.pds-disclaimer__icon {
+  flex-shrink: 0;
+}
+
+/* --- Link --- */
+.pds-information__link {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: var(--color-text-primary, #051766);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.pds-information__link:hover {
+  opacity: 0.7;
+}
+
+
+/* =========================
+   Tablet / Compact (max-width: 1059px)
+   - Layout: vertical (title top, paragraph bottom)
+   - Gap between title & paragraph: 12px
+   ========================= */
+@media screen and (max-width: 1059px) {
+  .pds-information {
+    max-width: none;
+    width: 100%;
+  }
+
+  .pds-information__item {
+    flex-direction: column;
+    gap: 1.2rem; /* 12px — compact variant gap */
+  }
+
+  .pds-information__item--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .pds-information__title {
+    width: 100%;
+    min-width: auto;
+    max-width: none;
+    font-size: 1.8rem; /* font/size/40 = 18px (compact title) */
+  }
+
+  .pds-information__paragraph {
+    width: 100%;
+    font-size: 1.6rem; /* font/size/30 = 16px (compact paragraph) */
+  }
+
+  .pds-disclaimer {
+    font-size: 1.4rem; /* font/size/20 = 14px (compact disclaimer) */
+  }
+
+  .pds-information__link {
+    font-size: 1.4rem;
+  }
+}
+
+
+/* =========================
+   Mobile (max-width: 599px)
+   - 동일 compact 구조, 폰트 사이즈 추가 축소
+   ========================= */
+@media screen and (max-width: 599px) {
+  .pds-information__item {
+    gap: 0.8rem;
+  }
+
+  .pds-information__title {
+    font-size: 1.6rem;
+  }
+
+  .pds-information__paragraph {
+    font-size: 1.4rem;
+  }
+
+  .pds-disclaimer {
+    font-size: 1.2rem;
+  }
+
+  .pds-information__link {
+    font-size: 1.3rem;
+  }
+}
