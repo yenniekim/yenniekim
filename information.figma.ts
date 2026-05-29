@@ -12,10 +12,20 @@ import figma, { html } from "@figma/code-connect/html"
  *   align  : left | center    → variant. Adds the `--center` item modifier.
  *   paragraph, copy 1-4, disclaimer 1-4, link → Boolean toggles.
  *
- * IMPORTANT: every content prop is a Boolean in Figma, so we render static markup
- * on `true`. Do NOT wrap these in figma.string() — a single Figma property cannot
- * be both Boolean and String, which is exactly what produced the "Error!" badge in
- * the Inspect panel previously.
+ * Text content:
+ *   `paragraph` (Boolean) controls visibility; the body copy is pulled from a
+ *   separate Text property `paragraph text` so each instance can show different
+ *   wording. These MUST be two distinct properties — a single Figma property
+ *   cannot be both Boolean and String. Reading the same name as both is exactly
+ *   what produced the "Error!" badge in Inspect previously.
+ *
+ *   ⚠️ Figma setup required: add a Text property named exactly `paragraph text`
+ *   to the component (bind it to the paragraph text layer). Until that property
+ *   exists, figma.string("paragraph text") will not resolve.
+ *
+ * The remaining content props (copy/disclaimer/link) stay as Boolean toggles with
+ * static example markup. To make any of them editable too, follow the same pattern:
+ * add a Text property in Figma and nest figma.string("<name>") inside the boolean.
  */
 
 const FIGMA_URL =
@@ -38,8 +48,9 @@ figma.connect(FIGMA_URL, {
       center: " pds-information__item--center",
     }),
 
+    // `paragraph` toggles visibility; `paragraph text` supplies the actual copy.
     paragraph: figma.boolean("paragraph", {
-      true: html`<p>본문 내용을 입력해 주세요.</p>`,
+      true: html`<p>${figma.string("paragraph text")}</p>`,
       false: html``,
     }),
 
